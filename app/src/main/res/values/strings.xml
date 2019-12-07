@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AndroidFirstAppM1</string>
+    <string name="hello">Hello</string>
+    <string name="roll">ROLL</string>
+    <string name="submit">Submit</string>
+    <string name="register">Register</string>
+</resources>
