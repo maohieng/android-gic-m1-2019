@@ -1,7 +1,6 @@
 package edu.itc.gic.m1.firstapp;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,20 +8,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Random;
 
 import edu.itc.gic.m1.firstapp.ui.DetailActivity;
 import edu.itc.gic.m1.firstapp.ui.LoginActivity;
+import edu.itc.gic.m1.firstapp.ui.ScrollingTextActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 
     Button mButton;
-    TextView mTextView;
+    Button mBtnScrollingText;
 
     Button mButtonDetail;
 
@@ -33,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         mButton = findViewById(R.id.button2); // object of button2
-        mTextView = findViewById(R.id.textView2);
+        mBtnScrollingText = findViewById(R.id.btnScrollingText);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 MainActivity.this.startActivity(intent);
+            }
+        });
+
+        mBtnScrollingText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ScrollingTextActivity.class);
+                startActivity(intent);
             }
         });
 

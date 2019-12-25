@@ -6,9 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <TextView
-        tools:text="TEST TEXT"
-        android:id="@+id/textView2"
+    <Button
+        android:text="Start Scrolling Text"
+        android:id="@+id/btnScrollingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,18 +22,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="39dp"
-        android:text="@string/roll"
+        android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/btnScrollingText" />
 
     <Button
         android:id="@+id/buttonDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start New Activity"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/btnScrollingText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
