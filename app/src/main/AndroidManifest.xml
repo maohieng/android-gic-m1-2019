@@ -25,6 +25,9 @@
 
         <activity android:name=".ui.ScrollingTextActivity"
             android:parentActivityName=".MainActivity"/>
+
+        <activity android:name=".ui.MessagingActivity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
