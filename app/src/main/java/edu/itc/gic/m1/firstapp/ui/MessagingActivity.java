@@ -14,6 +14,7 @@ import androidx.core.app.NavUtils;
 
 import edu.itc.gic.m1.firstapp.MainActivity;
 import edu.itc.gic.m1.firstapp.R;
+import edu.itc.gic.m1.firstapp.model.Message;
 
 /**
  * This class is used for ...
@@ -23,6 +24,7 @@ import edu.itc.gic.m1.firstapp.R;
 public class MessagingActivity extends BaseActivity {
 
     TextView receivedText;
+    TextView createdDateText;
     EditText replyText;
 
     @Override
@@ -31,11 +33,16 @@ public class MessagingActivity extends BaseActivity {
         setContentView(R.layout.activity_messaging);
 
         receivedText = findViewById(R.id.textMessageReceived);
+        createdDateText = findViewById(R.id.textDate);
         replyText = findViewById(R.id.editReply);
 
-        // receive message from MainActivity
-        String message = getIntent().getStringExtra(MainActivity.EXTRA_MESSAGE_NAME);
-        receivedText.setText(message);
+        // receive object from MainActivity
+//        String message = getIntent().getStringExtra(MainActivity.EXTRA_MESSAGE_NAME);
+        Message message = (Message) getIntent().getSerializableExtra(MainActivity.EXTRA_MESSAGE_NAME);
+
+        // set UIs
+        receivedText.setText(message.getMessage());
+        createdDateText.setText(message.getCreatedDate().toString());
     }
 
     @Override

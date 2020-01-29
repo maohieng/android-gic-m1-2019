@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.itc.gic.m1.firstapp.implicit_intent.ImplicitIntentDemoActivity;
 import edu.itc.gic.m1.firstapp.model.Message;
+import edu.itc.gic.m1.firstapp.pager.SongBookActivity;
 import edu.itc.gic.m1.firstapp.ui.DetailActivity;
 import edu.itc.gic.m1.firstapp.ui.LoginActivity;
 import edu.itc.gic.m1.firstapp.ui.MessagingActivity;
@@ -103,6 +105,14 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_MESSAGE_NAME, messageModel);
             startActivityForResult(intent, 72);
         }
+    }
+
+    public void clickOpenImplicitIntents(View view) {
+        startActivity(new Intent(this, ImplicitIntentDemoActivity.class));
+    }
+
+    public void clickOpenPager(View view) {
+        startActivity(new Intent(this, SongBookActivity.class));
     }
 
     //    public void clickRoll(View v) {
