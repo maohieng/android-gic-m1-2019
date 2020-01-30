@@ -11,7 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import edu.itc.gic.m1.firstapp.R;
+import edu.itc.gic.m1.firstapp.db.AppDatabase;
+import edu.itc.gic.m1.firstapp.db.ProductionDao;
+import edu.itc.gic.m1.firstapp.model.Production;
 
 /**
  * This class is used for ...
@@ -39,6 +44,13 @@ public class ProductionFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // Load data from database
+        AppDatabase database = AppDatabase.getInstance(getContext());
+        ProductionDao productionDao = database.getProductionDao();
+        List<Production> productions = productionDao.getAll();
+
+        // Set data into list adapter
+        adapter.setData(productions);
     }
 
 }

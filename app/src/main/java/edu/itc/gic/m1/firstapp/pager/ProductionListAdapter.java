@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import edu.itc.gic.m1.firstapp.R;
 import edu.itc.gic.m1.firstapp.model.Production;
 
@@ -22,8 +24,6 @@ import edu.itc.gic.m1.firstapp.model.Production;
 public class ProductionListAdapter extends
         BaseRecyclerAdapter<Production, ProductionListAdapter.ProductionViewHolder> {
 
-    Context context;
-
     ProductionListAdapter(Context context) {
         super(context);
     }
@@ -31,7 +31,6 @@ public class ProductionListAdapter extends
     @NonNull
     @Override
     public ProductionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
         View itemView = inflater.inflate(R.layout.item_list_production, parent, false);
 
         return new ProductionViewHolder(itemView);
@@ -45,8 +44,8 @@ public class ProductionListAdapter extends
     }
 
     @Override
-    public int getItemCount() {
-        return 0;
+    public void onBindViewHolder(@NonNull ProductionViewHolder holder, int position, @NonNull List<Object> payloads) {
+        super.onBindViewHolder(holder, position, payloads);
     }
 
     class ProductionViewHolder extends RecyclerView.ViewHolder {

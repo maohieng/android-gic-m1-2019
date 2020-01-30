@@ -12,8 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.itc.gic.m1.firstapp.db.AppDatabase;
+import edu.itc.gic.m1.firstapp.db.ProductionDao;
 import edu.itc.gic.m1.firstapp.implicit_intent.ImplicitIntentDemoActivity;
 import edu.itc.gic.m1.firstapp.model.Message;
+import edu.itc.gic.m1.firstapp.model.Production;
 import edu.itc.gic.m1.firstapp.pager.SongBookActivity;
 import edu.itc.gic.m1.firstapp.ui.DetailActivity;
 import edu.itc.gic.m1.firstapp.ui.LoginActivity;
@@ -68,6 +71,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // TODO: 1/29/2020 Initialize productions for testing
+        Production[] productions = new Production[] {
+                new Production("Hang Meas"),
+                new Production("SUNDAY"),
+                new Production("TOWN")
+        };
+
+        AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
+        ProductionDao productionDao = appDatabase.getProductionDao();
+        productionDao.save(productions);
 
     }
 
