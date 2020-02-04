@@ -2,6 +2,7 @@ package edu.itc.gic.m1.firstapp.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -17,14 +18,16 @@ public class Production {
 
     @ColumnInfo(name = "logo_url")
     String logo;
+
     String name;
 
     /**
-     * Default constructor - for any mapping lib
+     * Default constructor - ROOM
      */
     public Production() {
     }
 
+    @Ignore
     public Production(String name) {
         this.name = name;
     }
@@ -43,5 +46,13 @@ public class Production {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

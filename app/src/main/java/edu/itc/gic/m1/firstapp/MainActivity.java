@@ -1,8 +1,5 @@
 package edu.itc.gic.m1.firstapp;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import edu.itc.gic.m1.firstapp.db.AppDatabase;
 import edu.itc.gic.m1.firstapp.db.ProductionDao;
@@ -72,17 +75,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // TODO: 1/29/2020 Initialize productions for testing
-        Production[] productions = new Production[] {
-                new Production("Hang Meas"),
-                new Production("SUNDAY"),
-                new Production("TOWN")
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
+                ProductionDao productionDao = appDatabase.getProductionDao();
+
+                //Check data before simulate
+                List<Production> productionList = productionDao.getAll();
+
+                if (productionList == null || productionList.size() == 0) {
+                    // TODO: 1/29/2020 Simulate data production
+                    final Production[] productions = new Production[]{
+                            new Production("Hang Meas"),
+                            new Production("SUNDAY"),
+                            new Production("TOWN")
+                    };
+
+                    productionDao.save(productions);
+                }
+            }
         };
-
-        AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
-        ProductionDao productionDao = appDatabase.getProductionDao();
-        productionDao.save(productions);
-
+//        new Thread(runnable).start();
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(runnable);
     }
 
     private void startLogin() {
