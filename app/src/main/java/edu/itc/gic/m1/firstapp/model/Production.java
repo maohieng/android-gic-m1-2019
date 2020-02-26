@@ -1,5 +1,6 @@
 package edu.itc.gic.m1.firstapp.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -13,7 +14,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "productions")
 public class Production {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     long id;
 
     @ColumnInfo(name = "logo_url")
@@ -28,8 +29,9 @@ public class Production {
     }
 
     @Ignore
-    public Production(String name) {
+    public Production(String name, String logoUrl) {
         this.name = name;
+        this.logo = logoUrl;
     }
 
     public String getLogo() {
@@ -54,5 +56,11 @@ public class Production {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name;
     }
 }

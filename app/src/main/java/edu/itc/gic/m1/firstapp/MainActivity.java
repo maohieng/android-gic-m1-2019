@@ -74,31 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
-                ProductionDao productionDao = appDatabase.getProductionDao();
-
-                //Check data before simulate
-                List<Production> productionList = productionDao.getAll();
-
-                if (productionList == null || productionList.size() == 0) {
-                    // TODO: 1/29/2020 Simulate data production
-                    final Production[] productions = new Production[]{
-                            new Production("Hang Meas"),
-                            new Production("SUNDAY"),
-                            new Production("TOWN")
-                    };
-
-                    productionDao.save(productions);
-                }
-            }
-        };
-//        new Thread(runnable).start();
-        Executor executor = Executors.newSingleThreadExecutor();
-        executor.execute(runnable);
     }
 
     private void startLogin() {

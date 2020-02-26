@@ -1,8 +1,10 @@
 package edu.itc.gic.m1.firstapp.db;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -22,5 +24,13 @@ public interface ProductionDao {
     @Insert
     void save(Production... productions);
 
+    @Insert
+    void save(List<Production> productions);
+
+    @Update
+    void update(Production production);
+
+    @Delete
+    void delete(Production production);
 
 }

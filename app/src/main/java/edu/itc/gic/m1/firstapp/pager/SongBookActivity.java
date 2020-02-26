@@ -7,7 +7,18 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerTabStrip;
 import androidx.viewpager.widget.ViewPager;
 
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import edu.itc.gic.m1.firstapp.R;
+import edu.itc.gic.m1.firstapp.db.AppDatabase;
+import edu.itc.gic.m1.firstapp.db.ProductionDao;
+import edu.itc.gic.m1.firstapp.db.SingerDao;
+import edu.itc.gic.m1.firstapp.db.SongDao;
+import edu.itc.gic.m1.firstapp.model.Production;
+import edu.itc.gic.m1.firstapp.model.Singer;
+import edu.itc.gic.m1.firstapp.model.Song;
 import edu.itc.gic.m1.firstapp.ui.BaseActivity;
 
 /**
@@ -44,5 +55,33 @@ public class SongBookActivity extends BaseActivity {
 
         pager.setAdapter(new SongBookPageAdapter(getSupportFragmentManager(),
                 fragments, pageTitles));
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
+                ProductionDao productionDao = appDatabase.getProductionDao();
+
+                //Check data before simulate
+                List<Production> productionList = productionDao.getAll();
+
+                if (productionList == null || productionList.size() == 0) {
+                    // TODO: 1/29/2020 Simulate data production
+                    final Production[] productions = new Production[]{
+                            new Production("Hang Meas", "http://lh3.googleusercontent.com/W3q_EsCMpldD7fj6b8KFzPRDJ1PMJ2LVKEe2yuPT_IYPxhD-HKKX5s9N8aAnxf3xyE3a4faJS5WJ1M_1bDHN91-OSyWaiOU=s140-c"),
+                            new Production("SUNDAY", "http://lh3.googleusercontent.com/W3q_EsCMpldD7fj6b8KFzPRDJ1PMJ2LVKEe2yuPT_IYPxhD-HKKX5s9N8aAnxf3xyE3a4faJS5WJ1M_1bDHN91-OSyWaiOU=s140-c"),
+                            new Production("TOWN", "http://lh3.googleusercontent.com/W3q_EsCMpldD7fj6b8KFzPRDJ1PMJ2LVKEe2yuPT_IYPxhD-HKKX5s9N8aAnxf3xyE3a4faJS5WJ1M_1bDHN91-OSyWaiOU=s140-c")
+                    };
+
+                    productionDao.save(productions);
+                }
+
+                SingerDao singerDao = appDatabase.getSingerDao();
+                singerDao.save(new Singer("Meas Soksophea", "http://lh3.googleusercontent.com/W3q_EsCMpldD7fj6b8KFzPRDJ1PMJ2LVKEe2yuPT_IYPxhD-HKKX5s9N8aAnxf3xyE3a4faJS5WJ1M_1bDHN91-OSyWaiOU=s140-c"));
+            }
+        };
+//        new Thread(runnable).start();
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(runnable);
     }
 }
